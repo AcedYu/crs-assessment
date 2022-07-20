@@ -1,9 +1,13 @@
-import "./App.css";
+import Table from "./components/Table.js";
+import Nav from "./components/Nav.js";
+// import Words from "./components/Typographytest.js";
 
 const App = () => {
   return (
     <div className="App">
-      <h1>My Contacts</h1>
+      <Nav />
+      <Table />
+      {/* <Words /> */}
     </div>
   );
 };
