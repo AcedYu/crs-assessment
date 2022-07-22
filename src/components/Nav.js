@@ -13,6 +13,8 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
+import API from "../utils/API";
+
 const styles = {
   root: {
     flexGrow: 1
@@ -29,9 +31,24 @@ const styles = {
 function ButtonAppBar(props) {
   const { classes } = props;
   const [show, setShow] = React.useState(false);
+  const [formObject, setFormObject] = React.useState({});
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormObject({ ...formObject, [name]: value });
+  };
+
+  const handleSubmit = (event) => {
+    API.postContact(formObject)
+      .then((res) => {
+        setFormObject({});
+        handleClose();
+      })
+      .catch((err) => alert("Something went wrong!"));
+  };
 
   return (
     <div className={classes.root}>
@@ -62,6 +79,8 @@ function ButtonAppBar(props) {
             margin="dense"
             id="name"
             label="Name"
+            name="name"
+            onChange={handleInputChange}
             fullWidth
           />
           <TextField
@@ -70,6 +89,8 @@ function ButtonAppBar(props) {
             margin="dense"
             id="email"
             label="Email"
+            name="email"
+            onChange={handleInputChange}
             fullWidth
           />
           <TextField
@@ -78,6 +99,8 @@ function ButtonAppBar(props) {
             margin="dense"
             id="phone"
             label="Phone #"
+            name="phone"
+            onChange={handleInputChange}
             fullWidth
           />
         </DialogContent>
@@ -85,7 +108,7 @@ function ButtonAppBar(props) {
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleSubmit} color="primary">
             Add
           </Button>
         </DialogActions>
