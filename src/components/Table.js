@@ -7,7 +7,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import Checkbox from "@material-ui/core/Checkbox";
+import Button from "@material-ui/core/Button";
 
 const styles = (theme) => ({
   root: {
@@ -61,22 +61,22 @@ function SimpleTable(props) {
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
-            <TableCell>Select</TableCell>
             <TableCell>Name</TableCell>
             <TableCell>Email</TableCell>
-            <TableCell>Phone</TableCell>
+            <TableCell>Phone Number</TableCell>
+            <TableCell>Delete</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => {
             return (
               <TableRow key={row.id}>
-                <TableCell>
-                  <Checkbox />
-                </TableCell>
                 <TableCell>{row.name}</TableCell>
                 <TableCell>{row.email}</TableCell>
                 <TableCell>{row.phone}</TableCell>
+                <TableCell>
+                  <Button color="secondary">X</Button>
+                </TableCell>
               </TableRow>
             );
           })}

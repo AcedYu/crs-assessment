@@ -4,28 +4,39 @@ import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 
 const styles = {
   root: {
     flexGrow: 1
+  },
+  flex: {
+    flexGrow: 1
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20
   }
 };
 
-function SimpleAppBar(props) {
+function ButtonAppBar(props) {
   const { classes } = props;
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="primary">
+      <AppBar position="static">
         <Toolbar>
-          <Typography variant="h3">My Contacts</Typography>
+          <Typography variant="h3" color="inherit" className={classes.flex}>
+            My Contacts
+          </Typography>
+          <Button color="inherit">Add Contact</Button>
         </Toolbar>
       </AppBar>
     </div>
   );
 }
 
-SimpleAppBar.propTypes = {
+ButtonAppBar.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(SimpleAppBar);
+export default withStyles(styles)(ButtonAppBar);
