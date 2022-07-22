@@ -1,5 +1,5 @@
 const initState = {
-  posts: []
+  contacts: []
 };
 
 const rootReducer = (state = initState, action) => {
