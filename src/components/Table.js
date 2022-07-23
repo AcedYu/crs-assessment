@@ -37,9 +37,32 @@ function SimpleTable(props) {
   const dispatch = useDispatch();
   const [rows, setRows] = React.useState([]);
   const [show, setShow] = React.useState(false);
+  const [id, setID] = React.useState("");
+  const [formObject, setFormObject] = React.useState({});
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormObject({ ...formObject, [name]: value });
+  };
+
+  const handleSubmit = (event) => {
+    API.editContact(formObject)
+      .then((res) => {
+        setFormObject({});
+        handleClose();
+      })
+      .catch((err) => alert("Something went wrong!"));
+  };
+
+  const editContact = (event) => {
+    let editid = event.target.getAttribute("entryid");
+    setID(editid);
+    setFormObject({ ...formObject, id: id });
+    handleShow();
+  };
 
   React.useEffect(() => {
     getContacts();
@@ -84,11 +107,15 @@ function SimpleTable(props) {
               return (
                 <TableRow key={row.id}>
                   <TableCell>
-                    <Button color="primary" onClick={handleShow}>
-                      <span role="img" aria-label="edit">
-                        📝
-                      </span>
-                    </Button>
+                    <button
+                      className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary"
+                      tabindex="0"
+                      type="button"
+                      entryid={row.id}
+                      onClick={editContact}
+                    >
+                      EDIT
+                    </button>
                   </TableCell>
                   <TableCell>{row.name}</TableCell>
                   <TableCell>{row.email}</TableCell>
@@ -127,30 +154,34 @@ function SimpleTable(props) {
             margin="dense"
             id="name"
             label="Name"
+            name="name"
             fullWidth
+            onChange={handleInputChange}
           />
           <TextField
-            autoFocus
             required
             margin="dense"
             id="email"
             label="Email"
+            name="email"
             fullWidth
+            onChange={handleInputChange}
           />
           <TextField
-            autoFocus
             required
             margin="dense"
             id="phone"
             label="Phone #"
+            name="phone"
             fullWidth
+            onChange={handleInputChange}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleSubmit} color="primary">
             Confirm
           </Button>
         </DialogActions>

@@ -84,7 +84,6 @@ function ButtonAppBar(props) {
             fullWidth
           />
           <TextField
-            autoFocus
             required
             margin="dense"
             id="email"
@@ -94,7 +93,6 @@ function ButtonAppBar(props) {
             fullWidth
           />
           <TextField
-            autoFocus
             required
             margin="dense"
             id="phone"
