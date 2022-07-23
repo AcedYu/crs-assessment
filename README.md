@@ -43,7 +43,7 @@ npm start
 
 ## Deployed Link
 
-- [See Live Site]()
+- [See Live Site](https://acedyu.github.io/crs-assessment/)
 
 ## Authors
 
